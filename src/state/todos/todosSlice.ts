@@ -2,27 +2,29 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Todos {
   id: number;
-  text: string;
+  todo: string;
   completed: boolean;
+  userId?: number;
 }
 
-const initialState: Todos[] = [
-  { id: 1, text: "Complete your homework.", completed: false },
-];
+const initialState: Todos[] = [];
 
 const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    setTodos: (state, action) => {
+      return (state = action.payload);
+    },
     addTodo: (state, action) => {
       const newTodo = {
         id: Date.now(),
-        text: action.payload,
+        todo: action.payload,
         completed: false,
       };
-      state.push(newTodo);
+      state.unshift(newTodo);
     },
-    toggleTodo: (state, action) => {
+    toggleTodo: (state, action: PayloadAction<number>) => {
       const todo = state.find((todo) => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
@@ -34,5 +36,5 @@ const todosSlice = createSlice({
   },
 });
 
-export const { deleteTodo, addTodo } = todosSlice.actions;
+export const { deleteTodo, addTodo, toggleTodo, setTodos } = todosSlice.actions;
 export default todosSlice.reducer;
