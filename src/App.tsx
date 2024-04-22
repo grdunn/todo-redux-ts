@@ -95,6 +95,13 @@ function App() {
             </li>
           ))}
         </ul>
+        <div className="footer">
+          <Typography variant="body1">
+            <a target="_blank" href="https://github.com/grdunn/todo-redux-ts">
+              Code
+            </a>
+          </Typography>
+        </div>
       </Container>
     </>
   );
